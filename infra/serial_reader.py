@@ -74,7 +74,9 @@ class ArduinoSerialReader:
                 # O callback processa a leitura e grava a resposta calculada.
                 # A regra de envio é mantida aqui para a resposta física ao Arduino.
                 if entrada.umid >= 35.0 and entrada.mag >= 800:
-                    self._connection.write(b"ALERTA\\n")
+                    self._connection.write(b"A\n")
+                else:
+                    self._connection.write(b"N\n")
             except (UnicodeDecodeError, json.JSONDecodeError, ValidationError) as exc:
                 logger.warning("Leitura serial inválida: %s", exc)
             except serial.SerialException:
